@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дорожная карта маркетинга | Фасадные панели</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', -apple-system, Roboto, sans-serif;
+    background: #0f1419;
+    color: #e8eaed;
+    overflow: hidden;
+  }
+  .slide {
+    display: none;
+    height: 100vh;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 0.4s ease;
+  }
+  .slide.active { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  h1 { font-size: 2.8rem; margin-bottom: 20px; background: linear-gradient(90deg, #4fc3f7, #81c784); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  h2 { font-size: 2rem; margin-bottom: 30px; color: #4fc3f7; border-left: 4px solid #4fc3f7; padding-left: 20px; }
+  h3 { font-size: 1.2rem; color: #81c784; margin-bottom: 12px; }
+  p, li { font-size: 1.05rem; line-height: 1.7; color: #b0b6bd; }
+  ul { list-style: none; padding-left: 0; }
+  ul li { padding-left: 28px; position: relative; margin-bottom: 10px; }
+  ul li::before { content: '▸'; position: absolute; left: 0; color: #4fc3f7; font-weight: bold; }
+
+  .subtitle { font-size: 1.2rem; color: #81c784; margin-bottom: 40px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .card {
+    background: #1a2029;
+    border: 1px solid #2d3748;
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.2s;
+  }
+  .card:hover { transform: translateY(-4px); border-color: #4fc3f7; }
+
+  .phase-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .phase-1 { background: #1e3a5f; color: #4fc3f7; }
+  .phase-2 { background: #2d4a2b; color: #81c784; }
+  .phase-3 { background: #4a2d3f; color: #f48fb1; }
+
+  .stat { text-align: center; }
+  .stat .num { font-size: 2.4rem; font-weight: 700; color: #4fc3f7; display: block; }
+  .stat .label { font-size: 0.9rem; color: #8892a0; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  table th, table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #2d3748; font-size: 0.95rem; }
+  table th { color: #4fc3f7; font-weight: 600; background: #1a2029; }
+  table td { color: #b0b6bd; }
+  table tr:hover td { background: #1a2029; }
+
+  .nav {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+  }
+  .nav button {
+    background: #1a2029;
+    color: #4fc3f7;
+    border: 1px solid #2d3748;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+  }
+  .nav button:hover { background: #4fc3f7; color: #0f1419; }
+
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4fc3f7, #81c784);
+    transition: width 0.3s;
+    z-index: 100;
+  }
+
+  .page-num {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    font-size: 0.9rem;
+    color: #4a5568;
+  }
+
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: #2d3748; }
+  .timeline-item { position: relative; margin-bottom: 30px; }
+  .timeline-item::before { content: ''; position: absolute; left: -35px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: #4fc3f7; border: 3px solid #0f1419; }
+
+  .highlight { color: #81c784; font-weight: 600; }
+  .warn { color: #ffb74d; }
+
+  @media (max-width: 900px) {
+    .slide { padding: 30px 20px; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .nav { bottom: 15px; right: 15px; }
+    .page-num { bottom: 20px; left: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- SLIDE 1 -->
+<section class="slide active">
+  <h1>Дорожная карта маркетинга</h1>
+  <p class="subtitle">Фасадные панели → выход в лидеры региона за 18 месяцев</p>
+  <div class="grid-3" style="margin-top:40px;">
+    <div class="card stat"><span class="num">18</span><span class="label">месяцев до лидерства</span></div>
+    <div class="card stat"><span class="num">$750</span><span class="label">стартовый бюджет/мес</span></div>
+    <div class="card stat"><span class="num">300%+</span><span class="label">целевой ROI</span></div>
+  </div>
+  <p style="margin-top:40px; font-size:0.9rem; color:#4a5568;">Руководитель маркетингового отдела → Директору производства</p>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide">
+  <h2>1. Резюме для директора</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>🎯 Цель</h3>
+      <p>Обеспечить стабильный поток заказов и вывести компанию в топ-3 региона по узнаваемости и спецификациям.</p>
+    </div>
+    <div class="card">
+      <h3>💡 Стратегия</h3>
+      <p>Фокус на B2B (архитекторы, застройщики) + быстрые продажи через B2C и строительные магазины.</p>
+    </div>
+    <div class="card">
+      <h3>💰 Что нужно</h3>
+      <p>Минимальный бюджет $750/мес и 1 помощник (0,5 ставки) или подрядчики на аутсорсе.</p>
+    </div>
+    <div class="card">
+      <h3>📈 Результат</h3>
+      <p>6 мес — первые спецификации; 12 мес — рост выручки +30–50%; 18 мес — лидерство.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide">
+  <h2>2. Текущая ситуация и проблемы</h2>
+  <div class="grid-2">
+    <div>
+      <h3>Что есть</h3>
+      <ul>
+        <li>1 маркетолог (я)</li>
+        <li>Базовый сайт</li>
+        <li>Отсутствие системы лидогенерации</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="warn">Что мешает росту</h3>
+      <ul>
+        <li>Лиды теряются — нет CRM</li>
+        <li>Не работаем с архитекторами → упускаем крупнейший канал</li>
+        <li>Контент не отвечает на технические вопросы</li>
+        <li>Один человек распыляется на всё</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:30px; border-left:4px solid #ffb74d;">
+    <p><strong>Вывод:</strong> нужна поэтапная система с приоритетами и делегированием, а не «делать всё сразу».</p>
+  </div>
+</section>
+
+<!-- SLIDE 4 -->
+<section class="slide">
+  <h2>3. Цели и KPI по этапам</h2>
+  <table>
+    <thead>
+      <tr><th>Период</th><th>Цель</th><th>KPI</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0–3 мес</td><td>Фундамент: сайт, контент, аналитика</td><td>20+ MQL/мес, CPL ≤ $15</td></tr>
+      <tr><td>4–9 мес</td><td>Первые спецификации, рост заявок</td><td>50+ MQL/мес, 3+ спецификации, конверсия 10%</td></tr>
+      <tr><td>10–18 мес</td><td>Лидерство в регионе</td><td>Топ-3 по упоминаниям, выручка +50%, ROI ≥ 300%</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SLIDE 5 -->
+<section class="slide">
+  <h2>4. Стратегия: 5 каналов продвижения</h2>
+  <div class="grid-3">
+    <div class="card"><h3>🔍 SEO + сайт</h3><p>Основа B2B. Двуязычный, техкарты, кейсы, визуализации.</p></div>
+    <div class="card"><h3>📢 Google Ads</h3><p>Быстрые лиды на горячие запросы. Старт с узких ключей.</p></div>
+    <div class="card"><h3>🏛 Архитекторы</h3><p>Семинары, CPD, спецификации. Самый мощный B2B-канал.</p></div>
+    <div class="card"><h3>🏪 Строймагазины</h3><p>POS-материалы, обучение продавцов, программы лояльности.</p></div>
+    <div class="card"><h3>🎬 Контент</h3><p>Фото/видео монтажа, 3D-рендеры, кейсы «до/после».</p></div>
+    <div class="card"><h3>🤝 Дилеры</h3><p>Брендирование шоурумов, обучение, эксклюзив по территориям.</p></div>
+  </div>
+</section>
+
+<!-- SLIDE 6 — ROADMAP PHASE 1 -->
+<section class="slide">
+  <h2>5. Дорожная карта: Этап 1</h2>
+  <span class="phase-badge phase-1">МЕСЯЦЫ 1–3 · ФУНДАМЕНТ</span>
+  <div class="timeline" style="margin-top:20px;">
+    <div class="timeline-item"><h3>Аудит и оптимизация сайта</h3><p>SEO-аудит, скорость, формы заявок, двуязычность (рус/каз).</p></div>
+    <div class="timeline-item"><h3>Создание технического контента</h3><p>PDF-карты продукта, узлы монтажа, библиотека визуализаций.</p></div>
+    <div class="timeline-item"><h3>Запуск Google Ads</h3><p>Узкие горячие запросы, дневной бюджет 5–15 тыс ₸.</p></div>
+    <div class="timeline-item"><h3>Настройка CRM и аналитики</h3><p>Сквозная аналитика, учёт MQL/SQL, прозрачные отчёты.</p></div>
+  </div>
+  <p style="margin-top:20px;"><span class="highlight">Результат:</span> 20+ MQL/мес, понимание конверсии, база для масштабирования.</p>
+</section>
+
+<!-- SLIDE 7 — ROADMAP PHASE 2 -->
+<section class="slide">
+  <h2>5. Дорожная карта: Этап 2</h2>
+  <span class="phase-badge phase-2">МЕСЯЦЫ 4–9 · ЭКСПАНСИЯ</span>
+  <div class="timeline" style="margin-top:20px;">
+    <div class="timeline-item"><h3>Работа с архитекторами</h3><p>Список бюро, рассылка техкарт, 1–2 семинара, первые спецификации.</p></div>
+    <div class="timeline-item"><h3>Запуск работы со строймагазинами</h3><p>10–15 точек, POS-материалы, обучение продавцов, пилотные условия.</p></div>
+    <div class="timeline-item"><h3>Контент-маркетинг</h3><p>Кейсы, видео монтажа, отзывы, публикации в профсообществе.</p></div>
+    <div class="timeline-item"><h3>Старт дилерской сети</h3><p>Брендирование, обучение, эксклюзив по районам.</p></div>
+  </div>
+  <p style="margin-top:20px;"><span class="highlight">Результат:</span> 50+ MQL/мес, 3+ спецификации, выручка +20%.</p>
+</section>
+
+<!-- SLIDE 8 — ROADMAP PHASE 3 -->
+<section class="slide">
+  <h2>5. Дорожная карта: Этап 3</h2>
+  <span class="phase-badge phase-3">МЕСЯЦЫ 10–18 · ЛИДЕРСТВО</span>
+  <div class="timeline" style="margin-top:20px;">
+    <div class="timeline-item"><h3>Масштабирование рекламы</h3><p>Новые регионы, расширение ключей, ретаргетинг.</p></div>
+    <div class="timeline-item"><h3>PR и выставки</h3><p>Участие в отраслевых событиях, публикации, отраслевые награды.</p></div>
+    <div class="timeline-item"><h3>Прямые продажи застройщикам</h3><p>Крупные контракты, интеграция в проектные спецификации.</p></div>
+    <div class="timeline-item"><h3>Развитие партнёрской сети</h3><p>Программа лояльности для прорабов, приложение с кешбэком.</p></div>
+  </div>
+  <p style="margin-top:20px;"><span class="highlight">Результат:</span> топ-3 по упоминаниям, выручка +50%, ROI ≥ 300%.</p>
+</section>
+
+<!-- SLIDE 9 — RETAIL -->
+<section class="slide">
+  <h2>6. Отдельный фокус: строительные магазины</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Что даёт канал</h3>
+      <ul>
+        <li>Поток частных застройщиков и мелких подрядчиков</li>
+        <li>Рост узнаваемости бренда на полке</li>
+        <li>Ниже стоимость лида, чем в прямой рекламе</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Что предложить магазину</h3>
+      <ul>
+        <li>Маржа дилера 15–35%</li>
+        <li>Эксклюзив по территории</li>
+        <li>Обучение персонала</li>
+        <li>POS-материалы и образцы</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:24px;">
+    <h3>Программа лояльности для продавцов</h3>
+    <p>Бонусы за каждую проданную паллету, кешбэк для прорабов через QR на упаковке — по примеру «Металл Профиль» и «Дёке».</p>
+  </div>
+</section>
+
+<!-- SLIDE 10 — BUDGET -->
+<section class="slide">
+  <h2>7. Бюджет: три сценария</h2>
+  <table>
+    <thead>
+      <tr><th>Статья</th><th>Минимальный</th><th>Оптимальный</th><th>Агрессивный</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Реклама (Google)</td><td>$300</td><td>$700</td><td>$1500</td></tr>
+      <tr><td>SEO и контент</td><td>$200</td><td>$500</td><td>$1000</td></tr>
+      <tr><td>Семинары и POS</td><td>$100</td><td>$300</td><td>$600</td></tr>
+      <tr><td>Фрилансеры</td><td>$150</td><td>$300</td><td>$500</td></tr>
+      <tr><td>Помощник 0,5 ставки</td><td>—</td><td>$400</td><td>$800</td></tr>
+      <tr><td><strong>Итого / мес</strong></td><td><strong>$750</strong></td><td><strong>$2200</strong></td><td><strong>$4400</strong></td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:20px;">Рекомендую старт с <span class="highlight">минимального</span> — пилот на 3 месяца для проверки гипотез.</p>
+</section>
+
+<!-- SLIDE 11 — FORECAST -->
+<section class="slide">
+  <h2>8. Прогноз результатов</h2>
+  <div class="grid-3">
+    <div class="card stat"><span class="num">3 мес</span><span class="label">20–30 лидов, первые сделки</span></div>
+    <div class="card stat"><span class="num">6 мес</span><span class="label">2–3 спецификации, выручка +15%</span></div>
+    <div class="card stat"><span class="num">12 мес</span><span class="label">Выручка +30–50%</span></div>
+  </div>
+  <div class="card" style="margin-top:30px;">
+    <h3>Окупаемость</h3>
+    <p>Даже при минимальном бюджете <strong>2–3 дополнительных заказа в месяц</strong> полностью окупают маркетинг. Точка безубыточности — <span class="highlight">7–9 месяцев</span>.</p>
+  </div>
+</section>
+
+<!-- SLIDE 12 — RISKS -->
+<section class="slide">
+  <h2>9. Риски и как их закрываем</h2>
+  <table>
+    <thead>
+      <tr><th>Риск</th><th>Решение</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Долгий цикл B2B</td><td>Параллельно развиваем B2C и строймагазины для быстрых денег</td></tr>
+      <tr><td>Нехватка рук</td><td>Делегирование подрядчикам, наём помощника 0,5 ставки</td></tr>
+      <tr><td>Бюджет не окупится</td><td>Чёткие KPI, ежемесячный анализ, корректировка курса</td></tr>
+      <tr><td>Сопротивление архитекторов</td><td>Не продаём, а помогаем: семинары, техкарты, экспертиза</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SLIDE 13 — ASK -->
+<section class="slide">
+  <h2>10. Что требуется от директора</h2>
+  <div class="grid-2">
+    <div class="card"><h3>1. Утвердить бюджет</h3><p>Минимальный — $750/мес на 6 месяцев (пилот).</p></div>
+    <div class="card"><h3>2. Помощник или подрядчики</h3><p>0,5 ставки или бюджет на фрилансеров.</p></div>
+    <div class="card"><h3>3. Доступы</h3><p>CRM, производственные данные, сайт, аналитика.</p></div>
+    <div class="card"><h3>4. Поддержка</h3><p>Участие в отраслевых мероприятиях и семинарах.</p></div>
+  </div>
+</section>
+
+<!-- SLIDE 14 — CTA -->
+<section class="slide" style="text-align:center;">
+  <h1 style="font-size:3rem;">Готов к запуску</h1>
+  <p class="subtitle" style="margin-top:20px;">Предлагаю пилот на 3 месяца с минимальным бюджетом.</p>
+  <div class="card" style="max-width:600px; margin:40px auto; text-align:left;">
+    <p>Если KPI выполняются — масштабируем. Если нет — корректируем каналы.</p>
+    <p style="margin-top:15px;"><strong class="highlight">Это низкий риск и быстрый старт.</strong></p>
+  </div>
+  <p style="margin-top:40px; color:#4a5568;">Спасибо за внимание.</p>
+</section>
+
+<!-- NAV -->
+<div class="page-num" id="pageNum">1 / 14</div>
+<div class="nav">
+  <button onclick="prev()" aria-label="Назад">‹</button>
+  <button onclick="next()" aria-label="Вперёд">›</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+
+  function show(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    document.getElementById('pageNum').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('progress').style.width = ((current + 1) / slides.length * 100) + '%';
+  }
+  function next() { show(current + 1); }
+  function prev() { show(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  document.getElementById('progress').style.width = (1 / slides.length * 100) + '%';
+</script>
+</body>
+</html>
